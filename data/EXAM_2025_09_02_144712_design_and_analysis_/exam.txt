@@ -1,0 +1,15 @@
+Title: Design and Analysis of algorithm
+Exam ID: EXAM_2025_09_02_144712_design_and_analysis_
+
+Questions:
+Describe the different types of complexities involved in algorithm analysis. Give examples for each type.
+
+Explain how the growth of functions is used to measure algorithm performance. Provide examples with different growth rates.
+
+Define Big-O, Big-Ω, and Big-Θ notations. How do they help in analyzing algorithms?
+
+Consider the recursive algorithm defined by the recurrence relation T(n) = 2T(n/2) + n. Use the Master Theorem to solve this recurrence and find the time complexity.
+
+Compare Quick Sort and Merge Sort in terms of average and worst-case time complexities. Which situations favor one over the other? Justify your answer.
+
+Describe how Counting Sort works and analyze its time complexity. Under what conditions is Counting Sort most efficient?

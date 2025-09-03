@@ -1,0 +1,490 @@
+Title: Design and Analysis of algorithm
+Exam ID: EXAM_2025_09_02_144712_design_and_analysis_
+
+Questions:
+Describe the different types of complexities involved in algorithm analysis. Give examples for each type.
+
+Explain how the growth of functions is used to measure algorithm performance. Provide examples with different growth rates.
+
+Define Big-O, Big-Ω, and Big-Θ notations. How do they help in analyzing algorithms?
+
+Consider the recursive algorithm defined by the recurrence relation T(n) = 2T(n/2) + n. Use the Master Theorem to solve this recurrence and find the time complexity.
+
+Compare Quick Sort and Merge Sort in terms of average and worst-case time complexities. Which situations favor one over the other? Justify your answer.
+
+Describe how Counting Sort works and analyze its time complexity. Under what conditions is Counting Sort most efficient?
+
+
+--- Write your answers below this line ---
+
+
+
+1) Types of complexities in algorithm analysis (with examples)
+
+a) Time Complexity – number of primitive steps as a function of input size n.
+
+Best/Average/Worst case:
+
+Linear search: best O(1) (first item matches), average O(n), worst O(n).
+
+Quick Sort: average O(n log n), worst O(n²) (bad pivots).
+
+Amortized time: average per operation over a sequence. Example: dynamic array push_back is O(1) amortized (occasional O(n) resize).
+
+Expected time: average over random choices or random inputs. Example: randomized Quick Sort expected O(n log n).
+
+b) Space Complexity – total memory used (including input) or auxiliary space (extra memory besides input).
+
+Merge Sort uses O(n) auxiliary space; Heap Sort uses O(1).
+
+c) I/O / External Memory Complexity – number of disk/page transfers (important for huge data).
+
+External Merge Sort minimizes disk I/O; cost measured in block reads/writes.
+
+d) Communication / Cache Complexity (brief) – data movement between memory levels/cores.
+
+Matrix multiplication algorithms analyzed by cache misses or messages passed.
+
+e) Preprocessing vs Query Complexity (for data structures)
+
+E.g., building a hash table: preprocess O(n); queries average O(1).
+
+2) Growth of functions and algorithm performance
+
+We compare algorithms by how their cost functions grow as n increases, ignoring constant factors and lower-order terms.
+
+Common growth rates (smaller is better, for large n):
+
+O(1) – constant (hash table lookup).
+
+O(log n) – logarithmic (binary search, heap insert/delete).
+
+O(√n) – sublinear (trial division primality up to √n).
+
+O(n) – linear (single pass counting, BFS/DFS on |V|+|E|).
+
+O(n log n) – near-linear (comparison sorting lower bound; merge/heap/quick average).
+
+O(n²) – quadratic (two nested loops: naive LCS table fill, selection sort).
+
+O(n³) – cubic (naive matrix multiply).
+
+O(2^n) – exponential (subset enumeration, brute-force TSP).
+
+O(n!) – factorial (permutations, brute-force scheduling).
+
+As n grows, algorithms with lower-order growth remain practical; higher-order ones quickly become infeasible.
+
+3) Big-O, Big-Ω, Big-Θ
+
+Big-O (upper bound):
+
+𝑓
+(
+𝑛
+)
+=
+𝑂
+(
+𝑔
+(
+𝑛
+)
+)
+f(n)=O(g(n)) if ∃ constants 
+𝑐
+,
+𝑛
+0
+c,n
+0
+	​
+
+ such that 
+0
+≤
+𝑓
+(
+𝑛
+)
+≤
+𝑐
+ 
+𝑔
+(
+𝑛
+)
+0≤f(n)≤cg(n) for all 
+𝑛
+≥
+𝑛
+0
+n≥n
+0
+	​
+
+.
+“Doesn’t grow faster than.” Example: 
+3
+𝑛
+2
++
+5
+𝑛
+=
+𝑂
+(
+𝑛
+2
+)
+3n
+2
++5n=O(n
+2
+).
+
+Big-Ω (lower bound):
+
+𝑓
+(
+𝑛
+)
+=
+Ω
+(
+𝑔
+(
+𝑛
+)
+)
+f(n)=Ω(g(n)) if ∃ 
+𝑐
+,
+𝑛
+0
+c,n
+0
+	​
+
+ such that 
+𝑓
+(
+𝑛
+)
+≥
+𝑐
+ 
+𝑔
+(
+𝑛
+)
+f(n)≥cg(n) for all 
+𝑛
+≥
+𝑛
+0
+n≥n
+0
+	​
+
+.
+“Grows at least as fast as.”
+
+Big-Θ (tight bound):
+
+𝑓
+(
+𝑛
+)
+=
+Θ
+(
+𝑔
+(
+𝑛
+)
+)
+f(n)=Θ(g(n)) if 
+𝑓
+(
+𝑛
+)
+=
+𝑂
+(
+𝑔
+(
+𝑛
+)
+)
+f(n)=O(g(n)) and 
+𝑓
+(
+𝑛
+)
+=
+Ω
+(
+𝑔
+(
+𝑛
+)
+)
+f(n)=Ω(g(n)).
+Example: 
+𝑛
+log
+⁡
+𝑛
++
+7
+𝑛
+=
+Θ
+(
+𝑛
+log
+⁡
+𝑛
+)
+nlogn+7n=Θ(nlogn).
+
+How they help: provide machine-independent scalability bounds, let us compare algorithms, combine with recurrences, and reason about worst/average behaviors while ignoring constants.
+
+4) Solve 
+𝑇
+(
+𝑛
+)
+=
+2
+𝑇
+(
+𝑛
+/
+2
+)
++
+𝑛
+T(n)=2T(n/2)+n via Master Theorem
+
+Here 
+𝑎
+=
+2
+,
+  
+𝑏
+=
+2
+,
+  
+𝑓
+(
+𝑛
+)
+=
+𝑛
+a=2,b=2,f(n)=n.
+Compute 
+𝑛
+log
+⁡
+𝑏
+𝑎
+=
+𝑛
+log
+⁡
+2
+2
+=
+𝑛
+n
+log
+b
+	​
+
+a
+=n
+log
+2
+	​
+
+2
+=n.
+
+This is Master Theorem Case 2 ( 
+𝑓
+(
+𝑛
+)
+=
+Θ
+(
+𝑛
+log
+⁡
+𝑏
+𝑎
+)
+f(n)=Θ(n
+log
+b
+	​
+
+a
+) ).
+Therefore:
+
+𝑇
+(
+𝑛
+)
+=
+Θ
+(
+𝑛
+log
+⁡
+𝑏
+𝑎
+log
+⁡
+𝑛
+)
+=
+Θ
+(
+𝑛
+log
+⁡
+𝑛
+)
+.
+T(n)=Θ(n
+log
+b
+	​
+
+a
+logn)=Θ(nlogn).
+5) Quick Sort vs Merge Sort
+Aspect	Quick Sort	Merge Sort
+Average time	O(n log n)	O(n log n)
+Worst time	O(n²) (e.g., already sorted with bad pivots)	O(n log n) (deterministic)
+Space (aux.)	In-place, expected O(log n) stack; worst O(n) stack (unbalanced)	Needs O(n) extra array (unless linked list)
+Stability	Not stable by default	Stable (typical implementations)
+Cache behavior	Excellent locality; often fastest in practice	Sequential access, good for streams/external sort
+Parallelism	Good divide-and-conquer parallelism	Also parallelizable; natural for external/linked lists
+
+Use Quick Sort when: in-memory arrays, you want speed on average, minimal extra space, good cache behavior, and you can randomize/median-of-three pivots to avoid worst cases.
+
+Use Merge Sort when: you need a guaranteed O(n log n) worst case, need stable sorting (key ties kept in input order), sorting linked lists, or doing external sorting on disks.
+
+6) Counting Sort: how it works & complexity
+
+Idea: Non-comparison sort for integer keys in a known, small range 
+0..
+𝑘
+0..k.
+
+Steps (stable version):
+
+Make count array 
+𝐶
+[
+0..
+𝑘
+]
+C[0..k] initialized to 0.
+
+For each element 
+𝑥
+x in input 
+𝐴
+[
+1..
+𝑛
+]
+A[1..n], increment 
+𝐶
+[
+𝑥
+]
+C[x].
+
+Convert counts to prefix sums: for 
+𝑖
+=
+1..
+𝑘
+i=1..k, set 
+𝐶
+[
+𝑖
+]
+←
+𝐶
+[
+𝑖
+]
++
+𝐶
+[
+𝑖
+−
+1
+]
+C[i]←C[i]+C[i−1].
+(Now 
+𝐶
+[
+𝑖
+]
+C[i] = number of elements 
+≤
+𝑖
+≤i.)
+
+Traverse 
+𝐴
+A from right to left; place each 
+𝑥
+x into output 
+𝐵
+[
+𝐶
+[
+𝑥
+]
+]
+B[C[x]], then decrement 
+𝐶
+[
+𝑥
+]
+C[x]. (Right-to-left ensures stability.)
+
+Complexity:
+
+Time: O(n + k) (one pass to count, one to prefix, one to place).
+
+Space: O(n + k) for output + count array.
+
+When most efficient:
+
+Keys are integers (or can be mapped to integers) in a dense, small range with 
+𝑘
+=
+𝑂
+(
+𝑛
+)
+k=O(n).
+
+Example: sorting ages 0–120 for millions of people.
+
+When not ideal:
+
+Very large or sparse key ranges (e.g., 32-bit integers) → memory/time blow up; prefer comparison sorts or radix sort with small digit ranges.
